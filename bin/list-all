@@ -1,6 +1,11 @@
 #!/bin/bash
 
-BUILDS_URL=https://www.nasm.us/pub/nasm/releasebuilds/
+set -e
+
+CURRENT_SCRIPT_PATH=${BASH_SOURCE[0]}
+PLUGIN_DIR=$(dirname "$(dirname "$CURRENT_SCRIPT_PATH")")
+
+source "${PLUGIN_DIR}/utils/utils.bash"
 
 request_builds_page(){
   curl -s $BUILDS_URL

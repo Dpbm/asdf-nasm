@@ -1,0 +1,44 @@
+#!/bin/bash
+
+set -e
+
+CURRENT_SCRIPT_PATH=${BASH_SOURCE[0]}
+PLUGIN_DIR=$(dirname "$(dirname "$CURRENT_SCRIPT_PATH")")
+PREFIX_FILE='nasm-'
+FILE_EXTENSION='.tar.gz'
+ZIPPED_FILENAME=$PREFIX_FILE$ASDF_INSTALL_VERSION$FILE_EXTENSION
+UNZIPPED_FILENAME=$PREFIX_FILE$ASDF_INSTALL_VERSION
+
+source "${PLUGIN_DIR}/utils/utils.bash"
+
+FINAL_URL=$BUILDS_URL$ASDF_INSTALL_VERSION/$ZIPPED_FILENAME
+ZIPPED_FILE_PATH=/tmp/$ZIPPED_FILENAME
+UNZIPPED_FILE_PATH=/tmp/$UNZIPPED_FILENAME
+
+download_file_to_tmp(){
+  curl -o $ZIPPED_FILE_PATH $FINAL_URL
+}
+
+unzip_file(){
+  printf "Unziping $ZIPPED_FILE_PATH...\n"
+  tar -zxf $ZIPPED_FILE_PATH -C /tmp
+  printf "Unzipped successfully!\n"
+}
+
+move_unziped_file_to_asdf_download_directory(){
+  printf "Moving $UNZIPPED_FILE_PATH to $ASDF_DOWNLOAD_PATH...\n"
+  mv $UNZIPPED_FILE_PATH $ASDF_DOWNLOAD_PATH
+  printf "Moved successfully!\n"
+}
+
+remove_remain_files(){  
+  printf "Removing $ZIPPED_FILE_PATH and $UNZIPPED_FILE_PATH\n"
+  rm -rf $ZIPPED_FILE_PATH $UNZIPPED_FILE_PATH
+  printf "Removed successfully!\n"
+}
+
+download_required_version_and_prepare_file(){
+  download_file_to_tmp && unzip_file && move_unziped_file_to_asdf_download_directory && remove_remain_files
+}
+
+download_required_version_and_prepare_file
