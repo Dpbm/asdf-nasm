@@ -1,3 +1,5 @@
+#!/bin/bash
+
 BUILDS_URL=https://www.nasm.us/pub/nasm/releasebuilds/
 
 request_builds_page(){
@@ -19,3 +21,5 @@ unlist_headers_hrefs(){
 list(){
   request_builds_page | get_versions_href | remove_href_prefix | unlist_headers_hrefs
 }
+
+list
