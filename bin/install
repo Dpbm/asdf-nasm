@@ -21,8 +21,9 @@ run_make(){
 }
 
 move_bin_files(){
-  mv nasm $ASDF_INSTALL_PATH/bin
-  mv ndisasm $ASDF_INSTALL_PATH/bin
+  mkdir -p $ASDF_INSTALL_PATH/bin
+  mv ./nasm $ASDF_INSTALL_PATH/bin
+  mv ./ndisasm $ASDF_INSTALL_PATH/bin
 }
 
 run_installation_steps(){
