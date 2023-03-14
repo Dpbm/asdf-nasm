@@ -27,4 +27,4 @@ list(){
   request_builds_page | get_versions_href | remove_href_prefix | unlist_headers_hrefs
 }
 
-list
+echo `list`
