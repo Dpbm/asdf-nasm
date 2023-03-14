@@ -26,8 +26,13 @@ move_bin_files(){
   mv ./ndisasm $ASDF_INSTALL_PATH/bin
 }
 
+remove_remain_files(){
+  cd ..
+  rm -rf $VERSION_PATH 
+}
+
 run_installation_steps(){
-  go_to_directory && run_autogen && run_configure && run_make && move_bin_files
+  go_to_directory && run_autogen && run_configure && run_make && move_bin_files && remove_remain_files
 }
 
 run_installation_steps
