@@ -4,6 +4,7 @@ A plugin for the [asdf version manager](https://asdf-vm.com).
 
 </div>
 
+![Tests](https://github.com/Dpbm/asdf-nasm/actions/workflows/action.yml/badge.svg)
 
 # Dependencies
 
