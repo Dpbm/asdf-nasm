@@ -12,7 +12,10 @@ request_builds_page(){
 }
 
 get_versions_href(){
-   grep -Po '(href=").+?(?=/)' 
+   # grep -Po '(href=").+?(?=/)' 
+
+   # working in both macos and linux
+   grep -Eo "href=[^/]+"
 }
 
 remove_href_prefix(){
