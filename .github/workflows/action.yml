@@ -1,15 +1,28 @@
 name: 'Test nasm asdf plugin'
 
-on:
-  push:
-    branches:
-      - main
+on: push
 
 jobs:
-  plugin_test_command:
-    runs-on: ubuntu-latest
-    steps:
-      - name: asdf_plugin_test
-        uses: asdf-vm/actions/plugin-test@v1
-        with:
-          command: "nasm --version"
+    plugin_test_ubuntu:
+        runs-on: ubuntu-latest
+        steps:
+            - name: asdf_plugin_test
+              uses: asdf-vm/actions/plugin-test@v1
+              with:
+                  command: 'nasm --version'
+
+    plugin_test_windows:
+        runs-on: windows-latest
+        steps:
+            - name: asdf_plugin_test
+              uses: asdf-vm/actions/plugin-test@v1
+              with:
+                  command: 'nasm --version'
+
+    plugin_test_mac:
+        runs-on: macos-latest
+        steps:
+            - name: asdf_plugin_test
+              uses: asdf-vm/actions/plugin-test@v1
+              with:
+                  command: 'nasm --version'
