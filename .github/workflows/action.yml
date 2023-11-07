@@ -32,36 +32,34 @@ jobs:
         defaults:
             run:
                 shell: wsl-bash_Ubuntu-20.04 {0}
+        env:
+            ASDF_DIR: /root/.asdf
+            ASDF_EXEC: /root/.asdf/bin/asdf
         steps:
             - uses: actions/checkout@v3
             - uses: Vampire/setup-wsl@v2
               with:
                   distribution: Ubuntu-20.04
 
-            - name: 'Git installation'
-              run: |
-                  sudo apt-get install git
-                  git config --global user.name "Auto"
-                  git config --global user.email ""
-
             - name: 'Asdf installation'
               run: |
+                  git config --global advice.detachedHead false
+                  export ASDF_DIR=${{env.ASDF_DIR}}
                   git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch ${{ env.ASDF_BRANCH }}
-                  echo '. "$HOME/.asdf/asdf.sh' >> ~/.bashrc
-                  . ~/.bashrc
-                  asdf plugin add nasm https://github.com/Dpbm/asdf-nasm.git
+                  sh $ASDF_DIR/asdf.sh
+                  ${{env.ASDF_EXEC}} plugin add nasm https://github.com/Dpbm/asdf-nasm.git
 
             - name: 'Test list-all'
-              run: 'asdf list-all nasm'
+              run: '${{env.ASDF_EXEC}} list-all nasm'
 
             - name: 'Test install version'
-              run: 'asdf install nasm ${{env.DEFAULT_NASM_VERSION}}'
+              run: '${{env.ASDF_EXEC}} install nasm ${{env.DEFAULT_NASM_VERSION}}'
 
             - name: 'Test nasm version'
               run: 'nasm --version'
 
             - name: 'Show plugins'
-              run: 'asdf list'
+              run: '${{env.ASDF_EXEC}} list'
 
     plugin_test_mac:
         runs-on: macos-latest
