@@ -35,6 +35,14 @@ jobs:
         steps:
             - uses: actions/checkout@v3
             - uses: Vampire/setup-wsl@v2
+              with:
+                  distribution: Ubuntu-20.04
+
+            - name: 'Git installation'
+              run: |
+                  sudo apt-get install git
+                  git config --global user.name "Auto"
+                  git config --global user.email ""
 
             - name: 'Asdf installation'
               run: |
