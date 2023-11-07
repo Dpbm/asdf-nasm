@@ -29,7 +29,14 @@ jobs:
     plugin_test_windows:
         runs-on: windows-latest
         steps:
+            - uses: actions/checkout@v3
             - uses: Vampire/setup-wsl@v2
+
+            - name: 'Test asdf install'
+              uses: asdf-vm/actions/install@v2
+              with:
+                  tool_versions: 'nasm ${{ env.DEFAULT_NASM_VERSION }}'
+
             - name: asdf_plugin_test
               uses: asdf-vm/actions/plugin-test@v2
               with:
