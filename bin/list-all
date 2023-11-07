@@ -12,7 +12,7 @@ request_builds_page(){
 }
 
 get_versions_href(){
-   grep -Po '(href=").+?(?=/)' 
+   grep -Eo "href=[^/]+"
 }
 
 remove_href_prefix(){
