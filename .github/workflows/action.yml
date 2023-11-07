@@ -7,7 +7,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: asdf_plugin_test
-              uses: asdf-vm/actions/plugin-test@v1
+              uses: asdf-vm/actions/plugin-test@v2
               with:
                   command: 'nasm --version'
 
@@ -16,7 +16,7 @@ jobs:
         steps:
             - uses: Vampire/setup-wsl@v2
             - name: asdf_plugin_test
-              uses: asdf-vm/actions/plugin-test@v1
+              uses: asdf-vm/actions/plugin-test@v2
               with:
                   command: 'nasm --version'
 
@@ -24,6 +24,6 @@ jobs:
         runs-on: macos-latest
         steps:
             - name: asdf_plugin_test
-              uses: asdf-vm/actions/plugin-test@v1
+              uses: asdf-vm/actions/plugin-test@v2
               with:
                   command: 'nasm --version'
