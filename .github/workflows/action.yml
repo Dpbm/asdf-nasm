@@ -4,6 +4,9 @@ on: push
 env:
     DEFAULT_NASM_VERSION: 2.16
     ASDF_BRANCH: v0.13.1
+    ASDF_DIR_WINDOWS: /root/.asdf
+    ASDF_EXEC: /root/.asdf/bin/asdf
+    ASDF_INSTALLATION_NASM: /root/.asdf/installs/nasm/2.16/bin/nasm
 
 jobs:
     plugin_test_ubuntu:
@@ -32,9 +35,6 @@ jobs:
         defaults:
             run:
                 shell: wsl-bash_Ubuntu-20.04 {0}
-        env:
-            ASDF_DIR: /root/.asdf
-            ASDF_EXEC: /root/.asdf/bin/asdf
         steps:
             - uses: actions/checkout@v3
             - uses: Vampire/setup-wsl@v2
@@ -47,7 +47,7 @@ jobs:
             - name: 'Asdf installation'
               run: |
                   git config --global advice.detachedHead false
-                  export ASDF_DIR=${{env.ASDF_DIR}}
+                  export ASDF_DIR=${{env.ASDF_DIR_WINDOWS}}
                   git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch ${{ env.ASDF_BRANCH }}
                   sh $ASDF_DIR/asdf.sh
                   ${{env.ASDF_EXEC}} plugin add nasm https://github.com/Dpbm/asdf-nasm.git
@@ -59,7 +59,7 @@ jobs:
               run: '${{env.ASDF_EXEC}} install nasm ${{env.DEFAULT_NASM_VERSION}}'
 
             - name: 'Test nasm version'
-              run: 'nasm --version'
+              run: '${{env.ASDF_INSTALLATION_NASM}} --version'
 
             - name: 'Show plugins'
               run: '${{env.ASDF_EXEC}} list'
