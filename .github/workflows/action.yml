@@ -35,6 +35,9 @@ jobs:
             - name: 'Test nasm version'
               run: 'nasm --version'
 
+            - name: 'Show plugins'
+              run: 'asdf list'
+
             - name: 'Test asdf list-all'
               run: 'asdf list-all nasm'
 
