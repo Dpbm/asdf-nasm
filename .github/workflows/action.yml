@@ -28,3 +28,6 @@ jobs:
             - run: touch .tool-versions
 
             - uses: asdf-vm/actions/install@v2
+              with:
+                  skip_install: true
+            - uses: asdf-vm/actions/plugins-add@v2
