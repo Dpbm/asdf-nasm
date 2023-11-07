@@ -31,4 +31,8 @@ jobs:
               with:
                   tool_versions: 'nasm ${{ env.DEFAULT_NASM_VERSION }}'
 
-            - uses: asdf-vm/actions/plugins-add@v2
+            - uses: asdf-vm/actions/plugin-test@v2
+              with:
+                  skip_install: true
+                  plugin: nasm
+                  command: 'nasm --version'
