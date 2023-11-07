@@ -24,4 +24,7 @@ jobs:
         runs-on: macos-latest
         steps:
             - uses: actions/checkout@v3
+
+            - run: touch .tool-versions
+
             - uses: asdf-vm/actions/install@v2
