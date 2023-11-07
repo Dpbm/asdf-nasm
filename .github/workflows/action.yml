@@ -27,12 +27,16 @@ jobs:
         steps:
             - uses: actions/checkout@v3
 
-            - uses: asdf-vm/actions/install@v2
+            - name: 'Test asdf install'
+              uses: asdf-vm/actions/install@v2
               with:
                   tool_versions: 'nasm ${{ env.DEFAULT_NASM_VERSION }}'
 
-            - uses: asdf-vm/actions/plugin-test@v2
-              with:
-                  skip_install: true
-                  plugin: nasm
-                  command: 'nasm --version'
+            - name: 'Test nasm version'
+              run: 'nasm --version'
+
+            - name: 'Test asdf list-all'
+              run: 'asdf list-all nasm'
+
+            - name: 'Test asdf download'
+              run: 'asdf download nasm ${{ env.DEFAULT_NASM_VERSION }}'
