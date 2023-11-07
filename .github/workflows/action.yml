@@ -25,7 +25,8 @@ jobs:
         steps:
             - uses: actions/checkout@v3
 
-            - run: touch .tool-versions
-
             - uses: asdf-vm/actions/install@v2
+              with:
+                  tool_versions: 'nasm 2.16'
+
             - uses: asdf-vm/actions/plugins-add@v2
