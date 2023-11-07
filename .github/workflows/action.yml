@@ -8,10 +8,23 @@ jobs:
     plugin_test_ubuntu:
         runs-on: ubuntu-latest
         steps:
+            - uses: actions/checkout@v3
+
+            - name: 'Test asdf install'
+              uses: asdf-vm/actions/install@v2
+              with:
+                  tool_versions: 'nasm ${{ env.DEFAULT_NASM_VERSION }}'
+
             - name: asdf_plugin_test
               uses: asdf-vm/actions/plugin-test@v2
               with:
                   command: 'nasm --version'
+
+            - name: 'Show plugins'
+              run: 'asdf list'
+
+            - name: 'Test asdf list-all'
+              run: 'asdf list-all nasm'
 
     plugin_test_windows:
         runs-on: windows-latest
@@ -40,6 +53,3 @@ jobs:
 
             - name: 'Test asdf list-all'
               run: 'asdf list-all nasm'
-
-            - name: 'Test asdf download'
-              run: 'asdf download nasm ${{ env.DEFAULT_NASM_VERSION }}'
