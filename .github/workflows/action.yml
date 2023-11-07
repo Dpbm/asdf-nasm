@@ -1,6 +1,8 @@
 name: 'Test nasm asdf plugin'
 
 on: push
+env:
+    DEFAULT_NASM_VERSION: 2.16
 
 jobs:
     plugin_test_ubuntu:
@@ -27,6 +29,6 @@ jobs:
 
             - uses: asdf-vm/actions/install@v2
               with:
-                  tool_versions: 'nasm 2.16'
+                  tool_versions: 'nasm ${{ env.DEFAULT_NASM_VERSION }}'
 
             - uses: asdf-vm/actions/plugins-add@v2
