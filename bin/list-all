@@ -16,7 +16,7 @@ get_versions_href(){
 }
 
 remove_href_prefix(){
-  sed -r 's/href="//'
+  sed 's/href="//'
 }
 
 unlist_headers_hrefs(){
