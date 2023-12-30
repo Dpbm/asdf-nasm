@@ -3,7 +3,7 @@ name: 'Test nasm asdf plugin'
 on: 
   push:
     branches:
-      - "*"
+      - [ "main" ]
 
   pull_request:
     branches:
